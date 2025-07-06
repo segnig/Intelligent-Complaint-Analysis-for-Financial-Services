@@ -1,0 +1,5 @@
+.venv/
+
+
+data/processed/filtered_complaints.csv
+data/raw/complaints.csv
