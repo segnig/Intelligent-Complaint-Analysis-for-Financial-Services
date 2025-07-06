@@ -1,8 +1,3 @@
-Here is a **professionally structured and standardized `README.md`** suitable for showcasing your CrediTrust AI-powered chatbot project on GitHub. This version follows best practices in open-source documentation, including clear sections, badges, and formatting conventions.
-
----
-
-````markdown
 # 🧠 CrediTrust AI Complaint-Answering Chatbot
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
