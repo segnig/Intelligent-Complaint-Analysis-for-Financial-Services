@@ -1,0 +1,6 @@
+# data loading and manipulation
+pandas
+
+# data visualization
+matplotlib
+seaborn
