@@ -4,3 +4,10 @@ pandas
 # data visualization
 matplotlib
 seaborn
+
+# embeddings
+ce_transformers 
+langchain 
+
+chromadb 
+tqdm
