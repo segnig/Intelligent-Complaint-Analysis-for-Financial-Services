@@ -6,8 +6,17 @@ matplotlib
 seaborn
 
 # embeddings
-ce_transformers 
+sentence-transformers
+transformers
 langchain 
+
 
 chromadb 
 tqdm
+
+
+# generative AI
+google-generativeai
+
+# interface
+gradio
