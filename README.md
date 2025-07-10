@@ -1,3 +1,4 @@
+
 # 🧠 CrediTrust AI Complaint-Answering Chatbot
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -19,10 +20,9 @@
 - [🚀 Setup & Installation](#-setup--installation)
 - [✅ Tasks Overview](#-tasks-overview)
 - [🧪 Evaluation Strategy](#-evaluation-strategy)
-- [📷 UI Preview (Coming Soon)](#-ui-preview-coming-soon)
+- [📷 UI Preview](#-ui-preview)
 - [📚 Learning Outcomes](#-learning-outcomes)
-- [📅 Timeline](#-timeline)
-- [👥 Contributors](#-contributors)
+- [📄 License](#-license)
 
 ---
 
@@ -42,20 +42,21 @@ Each month, thousands of unstructured customer complaints are submitted across m
 ## 🎯 Objectives & KPIs
 
 ### 📌 Key Performance Indicators (KPIs):
-- ⏱️ Reduce trend detection time from days to minutes.
-- 🧑‍💻 Empower non-technical teams (Support, Compliance) to self-serve insights.
-- 📈 Enable proactive product fixes through real-time feedback analysis.
+
+- ⏱️ Reduce trend detection time from days to minutes  
+- 🧑‍💻 Empower non-technical teams (Support, Compliance) to self-serve insights  
+- 📈 Enable proactive product fixes through real-time feedback analysis
 
 ---
 
 ## 💡 Solution Overview
 
-This project delivers a Retrieval-Augmented Generation (RAG) system that:
-- ✅ Allows plain-English queries (e.g., _"Why are people unhappy with BNPL?"_)
+This project delivers a fully functional Retrieval-Augmented Generation (RAG) system that:
+- ✅ Accepts plain-English queries (e.g., _"Why are people unhappy with BNPL?"_)
 - ✅ Retrieves relevant complaint narratives using semantic search
-- ✅ Synthesizes answers using an LLM with context
-- ✅ Supports multi-product and source traceability
-- ✅ Offers a Gradio/Streamlit-powered chatbot interface
+- ✅ Synthesizes concise answers using an LLM with context
+- ✅ Provides multi-product and source traceability
+- ✅ Features a **Gradio-powered chatbot** interface for real-time interaction
 
 ---
 
@@ -67,28 +68,47 @@ This project delivers a Retrieval-Augmented Generation (RAG) system that:
 ### Key Fields:
 - `Product`, `Sub-product`
 - `Consumer complaint narrative`
-- `Issue`, `Company`, `Date received`, `Complaint ID`
+- `Issue`, `Company`
+- `Date received`, `Complaint ID`
 
 ---
 
 ## 🛠️ Project Structure
 
 ```bash
-credtrust-rag-chatbot/
+INTELLIGENT-COMPLAINT-ANALYSIS-FOR-FINANCIAL-SERVICES/
+├── .env
+├── .gitignore
+├── Dockerfile
+├── docker-compose.yml
+├── main.py                     
+├── README.md
+├── requirements.txt
+│
 ├── data/
-│   └── filtered_complaints.csv        # Cleaned and preprocessed dataset
+│   ├── raw/                    
+│   └── processed/
+│       └── filtered_complaints.csv  # Cleaned complaint data
+│
 ├── notebooks/
-│   └── 01_eda_preprocessing.ipynb     # EDA and preprocessing
+│   ├── 01_eda_preprocessing.ipynb
+│   └── 1.0-eda.ipynb
+│
 ├── src/
-│   ├── embedding_indexing_chroma.py   # Chunking + Embedding + ChromaDB Indexing
-│   └── rag_pipeline.py                # RAG query logic (retrieval + generation)
-├── vector_store/
-│   └── chroma/                        # Persisted vector index
-├── app.py                             # Gradio/Streamlit interactive UI
-├── interim_report.md / .docx          # Interim report (Task 1 & 2)
-├── final_report.md (Coming Soon)
-└── README.md
-````
+│   ├── api/
+│   │   └── __init__.py
+│   ├── credit_rag_assistant.py      # Main class/methods for RAG logic
+│   ├── data_processing.py           # Cleaning, formatting, chunking
+│   ├── embedding_indexing_chroma.py # Embedding & indexing into ChromaDB
+│   └── rag_interface.py             # Gradio interface 
+├── tests/
+│   └── test_data_processing.py      
+│
+└── vector_store/
+    └── chroma/
+        ├── chroma.sqlite3           # Persisted Chroma vector DB
+        └── [UUID folder]            # Auto-generated index metadata
+```
 
 ---
 
@@ -111,73 +131,54 @@ pip install -r requirements.txt
 python src/embedding_indexing_chroma.py
 ```
 
-### 💬 Launch Chatbot UI (Coming Soon)
+### 💬 Launch Chatbot UI (Gradio)
 
 ```bash
-streamlit run app.py
+python src/rag_interface.py
 ```
 
 ---
 
 ## ✅ Tasks Overview
 
-| Task       | Description                           | Status         |
-| ---------- | ------------------------------------- | -------------- |
-| **Task 1** | EDA & data preprocessing              | ✅ Done         |
-| **Task 2** | Text chunking & vector store indexing | ✅ Done         |
-| **Task 3** | RAG pipeline: Retrieval + Generation  | 🔄 In Progress |
-| **Task 4** | Gradio or Streamlit UI                | 🔄 In Progress |
+| Task       | Description                           | Status |
+| ---------- | ------------------------------------- | ------ |
+| **Task 1** | EDA & data preprocessing              | ✅ Done |
+| **Task 2** | Text chunking & vector store indexing | ✅ Done |
+| **Task 3** | RAG pipeline: Retrieval + Generation  | ✅ Done |
+| **Task 4** | Gradio Chatbot UI                     | ✅ Done |
 
 ---
 
 ## 🧪 Evaluation Strategy
 
-| Question                                           | Answer | Top Retrieved Chunks | Score (1–5) | Comments                      |
-| -------------------------------------------------- | ------ | -------------------- | ----------- | ----------------------------- |
-| *Why are users unhappy with BNPL?*                 | ...    | ...                  | 4           | Good retrieval but repetitive |
-| *What issues are most reported in Personal Loans?* | ...    | ...                  | 5           | Precise and insightful        |
-
-> Evaluation table will be finalized during Task 3 with qualitative analysis.
+| Question                                           | Answer                                                                | Top Retrieved Chunks | Score (1–5) | Comments                      |
+| -------------------------------------------------- | --------------------------------------------------------------------- | -------------------- | ----------- | ----------------------------- |
+| *Why are users unhappy with BNPL?*                 | Delays in refunds, unclear repayment terms, poor customer support     | ✅                    | 4           | Good retrieval but repetitive |
+| *What issues are most reported in Personal Loans?* | Unexpected interest hikes, denied applications, misleading promotions | ✅                    | 5           | Precise and insightful        |
+| *How often do customers complain about transfers?* | Frequently, especially delays and account mismatches                  | ✅                    | 4           | Add filtering for dates       |
 
 ---
 
-## 📷 UI Preview (Coming Soon)
+## 📷 UI Preview
+![alt text](image.png)
 
-```bash
-# Features:
-- [ ] Ask plain-English questions
-- [ ] View generated answers
-- [ ] See source complaints used to generate response
-- [ ] Stream output (optional)
-```
+### ✅ Features:
 
+* ✅ Ask plain-English questions
+* ✅ View generated answers
+* ✅ See source complaints used to generate response
+* ✅ Streamed output with LLM responses
 ---
 
 ## 📚 Learning Outcomes
 
 By building this project, you’ll:
 
-* Combine LLMs with vector search to power Q\&A over large text corpora
-* Use LangChain, sentence-transformers, and ChromaDB
-* Learn practical NLP techniques for real-world FinTech applications
-* Design end-to-end RAG systems with interactive UI
-
----
-
-## 📅 Timeline
-
-| Milestone             | Due Date                     |
-| --------------------- | ---------------------------- |
-| Challenge Launch      | Wed, 02 July 2025            |
-| 📝 Interim Submission | Sun, 06 July 2025 (8 PM UTC) |
-| 🚀 Final Submission   | Tue, 08 July 2025 (8 PM UTC) |
-
----
-
-## 👥 Contributors
-
-**Trainee:** Segni Girma
-**Facilitators:** Mahlet, Kerod, Rediet, Rehmet
+* Build a RAG pipeline combining semantic retrieval and generative models
+* Use LangChain, sentence-transformers, and ChromaDB for scalable QA systems
+* Learn practical NLP for FinTech use-cases (e.g., customer support, risk analysis)
+* Design and deploy an end-to-end LLM app with an intuitive Gradio interface
 
 ---
 
